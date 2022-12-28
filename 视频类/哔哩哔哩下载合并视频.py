@@ -21,11 +21,11 @@ def video_text(html):
     script = re.findall('window\.__playinfo__=(.*?)</script>', html)[0]
     title_html = html
     xiushi = BeautifulSoup(title_html, 'lxml')
-    name = xiushi.find('title').text
+    name = xiushi.find('title')
     script_json = json.loads(script)
     shipin_url = script_json['data']['dash']['video'][0]['base_url']
     shengyin_url = script_json['data']['dash']['audio'][0]['base_url']
-    return shipin_url, shengyin_url, name
+    return shipin_url, shengyin_url, name.text
 
 def wenjian(mv, mu, name, ys):
     shipin = html_url(mv).content
